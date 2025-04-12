@@ -9,6 +9,7 @@ from mfc_core import LabJackInterface, MassFlowController
 from mfc_ui import MFCUI
 import yaml
 import shutil
+from version import VERSION
 
 # Ensure configuration file exists in the working directory
 config_filename = "mfc_config.yml"
@@ -65,7 +66,9 @@ with open(csv_filepath, mode="w", newline="") as data_file:
 
 # Tkinter GUI setup
 root = tk.Tk()
-root.title("MFC Controller")
+
+# Update the title of the GUI window to include the version number
+root.title(f"MFC Controller v{VERSION}")
 
 
 # Callback to set all setpoints
@@ -73,6 +76,9 @@ def set_all_setpoints():
     setpoints = ui.get_setpoints()
     for mfc in mfc_list:
         mfc.set_flow(setpoints[mfc.name])
+    # Update the setpoint labels dynamically after setting all setpoints
+    for mfc in mfc_list:
+        ui.update_setpoint_label(mfc.name, setpoints[mfc.name])
 
 
 # Initialize UI

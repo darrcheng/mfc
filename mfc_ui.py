@@ -11,6 +11,7 @@ class MFCUI:
         self.set_all_callback = set_all_callback
         self.mfc_frames = {}
         self.setpoint_entries = {}
+        self.setpoint_labels = {}
         self.flow_labels = {}
 
         # Layout setup
@@ -65,19 +66,24 @@ class MFCUI:
             frame = ttk.Frame(self.mfc_info_frame, padding=10)
             frame.grid(row=row, column=column, sticky="w")
 
+            # Store the frame in the mfc_frames dictionary
+            self.mfc_frames[mfc.name] = frame
+
             ttk.Label(
                 frame, text=f"{mfc.name}:", font=("Arial", 12, "bold")
             ).grid(row=0, column=0, sticky="w")
 
+            # Store the setpoint_label in a dictionary for dynamic updates
             setpoint_label = ttk.Label(frame, text=f"Setpoint: {mfc.setpoint}")
             setpoint_label.grid(row=1, column=0, sticky="w")
-            self.setpoint_entries[mfc.name] = setpoint_label
+            self.setpoint_labels[mfc.name] = setpoint_label
 
             setpoint_entry = ttk.Spinbox(
                 frame, from_=0, to=100000, increment=100, width=10
             )
             setpoint_entry.insert(0, mfc.setpoint)
             setpoint_entry.grid(row=1, column=1, sticky="w")
+            self.setpoint_entries[mfc.name] = setpoint_entry
 
             flow_label = ttk.Label(frame, text="Flowrate: 0")
             flow_label.grid(row=2, column=0, sticky="w")
@@ -92,3 +98,7 @@ class MFCUI:
             name: float(entry.get())
             for name, entry in self.setpoint_entries.items()
         }
+
+    # Add a method to update the setpoint label dynamically
+    def update_setpoint_label(self, name, setpoint):
+        self.setpoint_labels[name].config(text=f"Setpoint: {int(setpoint)}")
