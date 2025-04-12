@@ -20,6 +20,16 @@ if not os.path.exists(user_config_path):
     shutil.copy(default_config_path, user_config_path)
     print(f"Default configuration file copied to {user_config_path}")
 
+# Check for README_USER.txt and copy it to the working directory if it doesn't exist
+readme_filename = f"README_USER_v{VERSION}.txt"
+readme_path = os.path.join(os.getcwd(), readme_filename)
+if not os.path.exists(readme_path):
+    bundled_readme_path = os.path.join(
+        os.path.dirname(__file__), "README_USER.txt"
+    )
+    shutil.copy(bundled_readme_path, readme_path)
+    print(f"README file copied to {readme_path}")
+
 # Load configuration
 with open(user_config_path, "r", encoding="utf-8") as f:
     config = yaml.safe_load(f)
@@ -82,7 +92,7 @@ def set_all_setpoints():
 
 
 # Initialize UI
-ui = MFCUI(root, mfc_list, image_path, set_all_setpoints)
+ui = MFCUI(root, mfc_list, config, set_all_setpoints)
 
 
 # Update MFC data

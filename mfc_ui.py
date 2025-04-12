@@ -2,12 +2,15 @@
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
+import os
+import yaml
 
 
 class MFCUI:
-    def __init__(self, root, mfc_list, image_path, set_all_callback):
+    def __init__(self, root, mfc_list, config, set_all_callback):
         self.root = root
         self.mfc_list = mfc_list
+        self.config = config
         self.set_all_callback = set_all_callback
         self.mfc_frames = {}
         self.setpoint_entries = {}
@@ -23,6 +26,28 @@ class MFCUI:
 
         self.image_frame = ttk.Frame(root, padding=10)
         self.image_frame.grid(row=0, column=1, rowspan=2, sticky="n")
+
+        # Dynamically load the image based on the filename in the configuration file
+        image_path = config.get("mfc_layout_image", "mfc_layout.png")
+        if not os.path.exists(image_path):
+            print(
+                f"Image not found: {image_path}. Falling back to default image."
+            )
+            image_path = os.path.join(
+                os.path.dirname(__file__), "mfc_layout.png"
+            )
+            config["mfc_layout_image"] = (
+                "mfc_layout.png"  # Update config to reflect default image
+            )
+
+        # Save updated config if it was modified
+        if config.get("mfc_layout_image") == "mfc_layout.png":
+            with open(
+                os.path.join(os.getcwd(), "mfc_config.yml"),
+                "w",
+                encoding="utf-8",
+            ) as f:
+                yaml.dump(config, f)
 
         # Load and display image
         try:

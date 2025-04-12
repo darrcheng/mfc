@@ -7,6 +7,8 @@ Repository containing code to control MKS mass flow controllers
 - Real-time flow rate monitoring with rounded integer values.
 - CSV logging of setpoints and flow rates for data analysis.
 - Mock mode for testing without a LabJack device.
+- Centralized version management for consistency across the project.
+- Automatically organizes data files into date-based subdirectories.
 
 ## Requirements
 - Python 3.7+
@@ -47,6 +49,18 @@ mfc1:
    python mfc_control.py
    ```
 2. Use the GUI to adjust setpoints and monitor flow rates.
+
+## Packaging as an Executable
+To package the project as a standalone executable:
+1. Ensure `PyInstaller` is installed:
+   ```bash
+   pip install pyinstaller
+   ```
+2. Run the following command to build the executable:
+   ```bash
+   pyinstaller mfc_control.spec
+   ```
+3. The executable will be available in the `dist` directory.
 
 ## Testing Without a LabJack
 Enable mock mode by setting `use_mock=True` in the `LabJackInterface` initialization in `mfc_control.py`.
