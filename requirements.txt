@@ -1,0 +1,4 @@
+# Requirements for the MFC Controller project
+labjack==1.23.0
+pillow==11.1.0
+pyyaml==6.0.2
