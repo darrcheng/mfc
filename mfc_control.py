@@ -8,14 +8,26 @@ import tkinter as tk
 from mfc_core import LabJackInterface, MassFlowController
 from mfc_ui import MFCUI
 import yaml
+import shutil
+
+# Ensure configuration file exists in the working directory
+config_filename = "mfc_config.yml"
+default_config_path = os.path.join(os.path.dirname(__file__), config_filename)
+user_config_path = os.path.join(os.getcwd(), config_filename)
+
+if not os.path.exists(user_config_path):
+    shutil.copy(default_config_path, user_config_path)
+    print(f"Default configuration file copied to {user_config_path}")
 
 # Load configuration
-with open("mfc_config.yml", "r", encoding="utf-8") as f:
+with open(user_config_path, "r", encoding="utf-8") as f:
     config = yaml.safe_load(f)
 
 num_mfc = config["num_mfc"]
 read_interval = config["read_interval"]
-image_path = config["mfc_layout_image"]
+
+# Update the image path to dynamically locate the file in the same directory as the script
+image_path = os.path.join(os.path.dirname(__file__), config["mfc_layout_image"])
 
 # Initialize LabJack interface
 labjack = LabJackInterface(use_mock=True)
@@ -37,12 +49,12 @@ for i in range(num_mfc):
 
 # Create CSV file
 start_time = datetime.now()
+data_dir = os.path.join(os.getcwd(), "data", start_time.strftime("%Y-%m-%d"))
+os.makedirs(data_dir, exist_ok=True)
 csv_filepath = os.path.join(
-    os.getcwd(),
-    start_time.strftime("%Y-%m-%d"),
+    data_dir,
     f"MFC_{start_time.strftime('%Y%m%d_%H%M%S')}.csv",
 )
-os.makedirs(os.path.dirname(csv_filepath), exist_ok=True)
 header = (
     ["datetime"]
     + [f"{mfc.name}_setpoint" for mfc in mfc_list]
