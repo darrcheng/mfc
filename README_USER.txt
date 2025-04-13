@@ -1,10 +1,10 @@
 # MFC Controller User Guide
 
 ## Overview
-The MFC Controller application allows you to control and monitor up to 8 Mass Flow Controllers (MFCs) using a graphical user interface (GUI). It supports real-time flow rate monitoring, dynamic setpoint adjustments, and data logging.
+The MFC Controller application allows you to control and monitor Mass Flow Controllers (MFCs) using a graphical user interface (GUI). It supports real-time flow rate monitoring, dynamic setpoint adjustments, and data logging.
 
 ## Features
-- Control up to 8 MFCs.
+- Control multiple MFCs.
 - Real-time flow rate monitoring.
 - Adjustable setpoints via the GUI.
 - Data logging in CSV format.

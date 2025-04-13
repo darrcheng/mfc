@@ -1,3 +1,6 @@
+num_mfc: 8
+read_interval: 1
+mfc_layout_image: mfc_layout.png
 mfc1:
   flow_read: AIN0
   flow_set: TDAC0
@@ -54,6 +57,3 @@ mfc8:
   offset: 0
   scale: 10000
   setpoint: 0
-mfc_layout_image: mfc_layout.png
-num_mfc: 8
-read_interval: 1

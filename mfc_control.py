@@ -41,7 +41,7 @@ read_interval = config["read_interval"]
 image_path = os.path.join(os.path.dirname(__file__), config["mfc_layout_image"])
 
 # Initialize LabJack interface
-labjack = LabJackInterface(use_mock=True)
+labjack = LabJackInterface(use_mock=False)
 
 # Initialize MFCs
 mfc_list = []
@@ -66,11 +66,10 @@ csv_filepath = os.path.join(
     data_dir,
     f"MFC_{start_time.strftime('%Y%m%d_%H%M%S')}.csv",
 )
-header = (
-    ["datetime"]
-    + [f"{mfc.name}_setpoint" for mfc in mfc_list]
-    + [f"{mfc.name}_flowrate" for mfc in mfc_list]
-)
+header = ["datetime"]
+for mfc in mfc_list:
+    header.append(f"{mfc.name}_setpoint")
+    header.append(f"{mfc.name}_flowrate")
 with open(csv_filepath, mode="w", newline="") as data_file:
     csv.writer(data_file).writerow(header)
 
