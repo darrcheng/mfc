@@ -3,7 +3,7 @@ Repository containing code to control MKS mass flow controllers
 
 ## Features
 - Dynamic setpoint control for multiple MFCs using a Tkinter GUI.
-- Supports up to 8 MFCs with automatic column layout adjustment for better visualization.
+- Supports multiple MFCs with automatic column layout adjustment for better visualization.
 - Real-time flow rate monitoring with rounded integer values.
 - CSV logging of setpoints and flow rates for data analysis.
 - Mock mode for testing without a LabJack device.
@@ -13,6 +13,7 @@ Repository containing code to control MKS mass flow controllers
 ## Requirements
 - Python 3.7+
 - LabJack LJM library
+- LabJack LJM Driver (https://support.labjack.com/docs/ljm-software-installer-downloads-t4-t7-t8-digit)
 - Pillow (for image handling)
 - PyYAML (for configuration file parsing)
 
@@ -30,7 +31,7 @@ Repository containing code to control MKS mass flow controllers
 ## Configuration
 Edit the `mfc_config.yml` file to define the MFCs and their parameters. Example:
 ```yaml
-num_mfc: 8
+num_mfc: 1
 read_interval: 1
 mfc_layout_image: "mfc_layout.png"
 mfc1:
@@ -64,6 +65,9 @@ To package the project as a standalone executable:
 
 ## Testing Without a LabJack
 Enable mock mode by setting `use_mock=True` in the `LabJackInterface` initialization in `mfc_control.py`.
+
+## Versioning
+The current version of the project is `1.0.0`. All version-related metadata is managed centrally in `version.py` and reflected across the project.
 
 ## License
 This project is licensed under the MIT License.

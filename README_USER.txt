@@ -69,6 +69,7 @@ Each MFC must be named sequentially in the configuration file, starting with `mf
 ### Common Issues
 - **Image Not Found**: Ensure the image file specified in `mfc_config.yml` exists in the same directory as the executable.
 - **Flow Rates Not Updating**: Check the connection to the LabJack device.
+- **'NoneType' object has no attribute 'LJM_OpenS'**: Check that both Python package (labjack-ljm) and LabJack drivers are installed 
 
 ## Support
 For further assistance, contact the developer or refer to the GitHub repository for updates.

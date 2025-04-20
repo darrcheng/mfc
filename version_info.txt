@@ -19,12 +19,12 @@ VSVersionInfo(
                     [
                         StringStruct(u'CompanyName', u'Your Company'),
                         StringStruct(u'FileDescription', u'MFC Controller'),
-                        StringStruct(u'FileVersion', u'0.0.0.0'),
+                        StringStruct(u'FileVersion', u'1.0.0.0'),
                         StringStruct(u'InternalName', u'mfc_control'),
                         StringStruct(u'LegalCopyright', u'Copyright © 2025 Darren Cheng'),
                         StringStruct(u'OriginalFilename', u'mfc_control.exe'),
                         StringStruct(u'ProductName', u'MFC Controller'),
-                        StringStruct(u'ProductVersion', u'0.0.0.0')
+                        StringStruct(u'ProductVersion', u'1.0.0.0')
                     ]
                 )
             ]
