@@ -17,6 +17,12 @@ Repository containing code to control MKS mass flow controllers
 - PyYAML (for configuration file parsing)
 
 ## Installation
+### Option 1
+1. Download latest release:
+   1. In right hand column, under Releases, navigate to latest release
+   2. Download `mfc_control_vX.X.X.exe`
+   3. Run `mfc_control_vX.X.X.exe` to create `mfc_config.yml` and `README_USER.txt`
+### Option 2
 1. Clone this repository:
    ```bash
    git clone https://github.com/your-repo/mfc.git
